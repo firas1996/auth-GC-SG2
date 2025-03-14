@@ -17,6 +17,7 @@ function App() {
   const loginHandler = (email, password) => {
     setIsLoggedIn(true);
     localStorage.setItem("token", "true");
+    return true;
   };
 
   const logoutHandler = () => {
