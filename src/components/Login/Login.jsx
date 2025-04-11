@@ -11,9 +11,9 @@ const Login = (props) => {
   const [passwordIsValid, setPasswordIsValid] = useState();
   const [formIsValid, setFormIsValid] = useState(false);
   useEffect(() => {
-    console.log("effect");
-    // deboucing
+    // debouncing
     const timer = setTimeout(() => {
+      console.log("effect");
       setFormIsValid(
         enteredEmail.includes("@") && enteredPassword.trim().length > 6
       );
