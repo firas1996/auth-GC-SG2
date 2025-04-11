@@ -4,7 +4,16 @@ import Card from "../UI/Card/Card";
 import classes from "./Login.module.css";
 import Button from "../UI/Button/Button";
 
-const emailReducer = () => {};
+const emailReducer = (prevState, actions) => {
+  switch (actions.name) {
+    case "user 9a3ed yekteb":
+      return { value: actions.payload, isValid: actions.payload.includes("@") };
+    case "user 5raj mel input":
+      return { value: prevState.value, isValid: prevState.value.includes("@") };
+    default:
+      return { value: "", isValid: null };
+  }
+};
 
 const Login = (props) => {
   // const [enteredEmail, setEnteredEmail] = useState("");
@@ -23,7 +32,7 @@ const Login = (props) => {
     const timer = setTimeout(() => {
       console.log("effect");
       setFormIsValid(
-        enteredEmail.includes("@") && enteredPassword.trim().length > 6
+        emailState.value.includes("@") && enteredPassword.trim().length > 6
       );
     }, 500);
     // cleanup function
@@ -31,9 +40,9 @@ const Login = (props) => {
       clearTimeout(timer);
       console.log("cleanup");
     };
-  }, [enteredEmail, enteredPassword]);
+  }, [emailState.value, enteredPassword]);
   const emailChangeHandler = (event) => {
-    setEnteredEmail(event.target.value);
+    // setEnteredEmail(event.target.value);
     dispatchEmail({ name: "user 9a3ed yekteb", payload: event.target.value });
     // setFormIsValid(
     //   event.target.value.includes("@") && enteredPassword.trim().length > 6
@@ -48,7 +57,7 @@ const Login = (props) => {
   };
 
   const validateEmailHandler = () => {
-    setEmailIsValid(enteredEmail.includes("@"));
+    // setEmailIsValid(enteredEmail.includes("@"));
     dispatchEmail({ name: "user 5raj mel input" });
   };
 
@@ -58,7 +67,7 @@ const Login = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    props.onLogin(enteredEmail, enteredPassword);
+    props.onLogin(emailState.value, enteredPassword);
   };
 
   return (
@@ -66,14 +75,14 @@ const Login = (props) => {
       <form onSubmit={submitHandler}>
         <div
           className={`${classes.control} ${
-            emailIsValid === false ? classes.invalid : ""
+            emailState.isValid === false ? classes.invalid : ""
           }`}
         >
           <label htmlFor="email">E-Mail</label>
           <input
             type="email"
             id="email"
-            value={enteredEmail}
+            value={emailState.value}
             onChange={emailChangeHandler}
             onBlur={validateEmailHandler}
           />
