@@ -2,7 +2,7 @@ import { useContext } from "react";
 import classes from "./Navigation.module.css";
 import AuthStore from "../../store/AuthContext";
 
-const Navigation = (props) => {
+const Navigation = () => {
   const ctx = useContext(AuthStore);
   return (
     <nav className={classes.nav}>
