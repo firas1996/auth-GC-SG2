@@ -44,7 +44,10 @@ const Login = () => {
         email,
         password,
       });
-      console.log(res);
+      // const res = await axios.get(
+      //   "http://10.33.2.3:7777/user?limit=2&role=user&page=5"
+      // );
+      console.log(res.data);
     } catch (error) {
       console.log(error);
     }
